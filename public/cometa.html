@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App POST Request</title>
+</head>
+<body>
+    <form id="postDataForm">
+        <label for="nameInput">Name:</label>
+        <input type="text" id="nameInput" name="name">
+        <label for="emailInput">Email:</label>
+        <input type="email" id="emailInput" name="email">
+        <button type="submit">Submit</button>
+    </form>
+    <div id="responseText"></div>
+
+    <script>
+        document.getElementById("postDataForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
+            
+            // Extract data from form inputs
+            const name = document.getElementById("nameInput").value;
+            const email = document.getElementById("emailInput").value;
+
+            // Make POST request
+            fetch("/cometa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name: name, email: email })
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Update responseText div with the received data
+                document.getElementById("responseText").innerText = JSON.stringify(data);
+            })
+            .catch(error => console.error("Error:", error));
+        });
+    </script>
+</body>
+</html>

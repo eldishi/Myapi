@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path'); // Import path module
 
@@ -16,6 +17,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve static files from the public directory
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // -------------------------------------------- ENDPOINTS --------------------------------------------
 
@@ -40,6 +44,24 @@ app.get('/players/salary', async (req, res) => {
     'error': 'Cannot access this information'
   })
 })
+
+app.get('/sopapa', async (req, res) => {
+  try{
+    res.send('Se cree que las sopapas artificiales han sido utilizadas por primera vez en el siglo III a. C., y estaban hechas de calabazas. Se utilizaban para succionar la «mala sangre» de los órganos internos a la superficie.');
+    }catch(e){
+      res.status(500).send({'error': 'Internal server error'})
+    }
+})
+
+app.post('/cometa', (req, res) => {
+  // Extract data from request body
+  const requestData = req.body;
+
+  // Perform any necessary operations with the received data
+  // For this example, let's just echo back the received data
+  res.json({ message: 'Received POST request', data: requestData });
+});
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
