@@ -53,6 +53,14 @@ app.get('/sopapa', async (req, res) => {
     }
 })
 
+app.get('/sopa', async (req, res) => {
+  try{
+    res.send('En caso de usar una sopapa, primero cerrá la llave del agua y ponete los guantes de goma. Quitá todas las cosas que estén alrededor o cerca del inodoro y cubrí el piso. Introducí la sopapa en el inodoro y presioná hacia abajo y luego hacia arriba repetidas veces.');
+    }catch(e){
+      res.status(500).send({'error': 'Internal server error'})
+    }
+})
+
 app.post('/cometa', (req, res) => {
   // Extract data from request body
   const requestData = req.body;

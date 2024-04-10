@@ -1,0 +1,38 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sopapa dato 2</title>
+</head>
+<style>
+body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+            background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiPgjJNux-tWxWCbSWkrbGxLSXj7a4kN6E2DdCKD5gnA&s");
+            background-size: cover;
+            background-position: center;
+}
+
+</style>
+<body>
+    <button id="getTextBtn">Get Text</button>
+    <div id="responseText"></div>
+    
+    <script>
+        document.getElementById("getTextBtn").addEventListener("click", function() {
+            // Make GET request
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "/sopa", true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                    // Update responseText div with the received text
+                    document.getElementById("responseText").innerText = xhr.responseText;
+                }
+            };
+            xhr.send();
+        });
+    </script>
+    <a href="index.html">Main page</a>
+</body>
+</html>
